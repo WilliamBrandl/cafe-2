@@ -1,0 +1,330 @@
+/* --- RESET E BÁSICOS --- */
+:root {
+    /* Paleta de Cores Premium */
+    --gold: #C6A675;
+    /* Dourado Sutil */
+    --dark-coffee: #2C1E18;
+    /* Marrom Profundo */
+    --cream: #FAF6F0;
+    /* Creme Suave */
+    --text-dark: #333333;
+    --white: #FFFFFF;
+
+    /* Tipografia */
+    --font-heading: 'Cormorant Garamond', serif;
+    /* Elegante para Títulos */
+    --font-body: 'Montserrat', sans-serif;
+    /* Moderna para Textos */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-shadow: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--white);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+a {
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+ul {
+    list-style: none;
+}
+
+/* --- HEADER SOFISTICADO --- */
+.header {
+    background: var(--dark-coffee);
+    padding: 1.5rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(198, 166, 117, 0.2);
+    /* Borda dourada bem suave em vez de preta */
+}
+
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Isso centraliza o logo e os links na mesma linha */
+    height: 80px;
+    /* Define uma altura fixa para o header se preferir */
+}
+
+.logo {
+    height: 250px;
+    /* Ajuste este valor (entre 50px e 80px) conforme seu gosto */
+    width: auto;
+    /* Mantém a proporção correta, sem distorcer */
+    display: block;
+    /* Remove espaços extras abaixo da imagem */
+    object-fit: contain;
+    /* Garante que a imagem caiba no espaço sem cortes */
+    transition: transform 0.3s ease;
+    /* Efeito suave se quiser animar depois */
+}
+
+/* Dica: se o logo parecer muito grudado no topo, adicione uma margem */
+.logo:hover {
+    transform: scale(1.05);
+    /* Um leve zoom ao passar o mouse traz sofisticação */
+}
+
+.nav {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav a {
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav a:hover:not(.btn-minimal) {
+    color: var(--gold);
+}
+
+/* --- BOTÕES PREMIUM --- */
+.btn-primary {
+    display: inline-block;
+    padding: 15px 35px;
+    background-color: var(--dark-coffee);
+    color: var(--cream);
+    font-weight: 600;
+    border-radius: 2px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+}
+
+.btn-primary:hover {
+    background-color: var(--gold);
+    color: var(--dark-coffee);
+}
+
+.btn-secondary {
+    display: inline-block;
+    padding: 15px 35px;
+    color: var(--dark-coffee);
+    font-weight: 600;
+    border-bottom: 2px solid var(--gold);
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+}
+
+.btn-minimal {
+    padding: 10px 20px;
+    border: 1px solid var(--dark-coffee);
+    color: white !important;
+}
+
+.btn-minimal:hover {
+    background: var(--cream);
+    color: var(--gold) !important;
+}
+
+/* --- HERO SECTION MODERNA --- */
+.hero {
+    padding-top: 160px;
+    /* Compensa o header fixo */
+    padding-bottom: 100px;
+    background-color: var(--cream);
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.subtitle {
+    display: block;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+    margin-bottom: 15px;
+}
+
+.hero-text h1 {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    line-height: 1.1;
+    color: var(--dark-coffee);
+    margin-bottom: 25px;
+}
+
+.hero-text p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+    max-width: 500px;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+/* --- CARROSSEL PROFISSIONAL --- */
+.carousel {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    border-radius: 4px;
+    /* Mais quadrado é mais moderno */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.slides {
+    display: flex;
+    width: 100%;
+}
+
+.slides img {
+    width: 100%;
+    flex-shrink: 0;
+    object-fit: cover;
+    aspect-ratio: 4/5;
+    /* Formato vertical chique (tipo Instagram portrait) */
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.dot.active {
+    background: var(--white);
+    transform: scale(1.2);
+}
+
+/* --- SEÇÃO SOBRE A MARCA --- */
+.section-sobre {
+    padding: 100px 0;
+    background-color: var(--white);
+    /* Fundo limpo para destacar a pureza */
+    text-align: center;
+}
+
+.sobre-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.etimologia {
+    display: block;
+    color: var(--gold);
+    letter-spacing: 5px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.section-sobre h2 {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    color: var(--dark-coffee);
+    margin-bottom: 20px;
+}
+
+.divisor-gold {
+    width: 60px;
+    height: 2px;
+    background-color: var(--gold);
+    margin: 0 auto 40px;
+}
+
+.texto-significado {
+    font-size: 1.25rem;
+    color: var(--dark-coffee);
+    font-family: var(--font-heading);
+    /* Fonte clássica para o significado */
+    font-style: italic;
+    margin-bottom: 30px;
+    line-height: 1.8;
+}
+
+.texto-missao {
+    font-size: 1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* Efeito de surgimento suave ao rolar (opcional) */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1.2s forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- FOOTER --- */
+.footer {
+    padding: 40px 0;
+    background-color: var(--dark-coffee);
+    color: rgba(250, 246, 240, 0.6);
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .hero-text h1 {
+        font-size: 2.8rem;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    /* Idealmente, faríamos um menu hambúrguer aqui */
+}
