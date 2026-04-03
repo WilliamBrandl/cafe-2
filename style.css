@@ -143,6 +143,10 @@ ul {
     color: var(--gold) !important;
 }
 
+
+
+
+
 /* --- HERO SECTION MODERNA --- */
 .hero {
     padding-top: 160px;
@@ -301,6 +305,92 @@ ul {
         transform: translateY(0);
     }
 }
+
+
+
+
+/* Configurações Gerais de Layout */
+.grid-2 {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    padding: 100px 0;
+}
+
+.grid-2.reverse {
+    flex-direction: row-reverse;
+}
+
+.content-box {
+    flex: 1;
+}
+
+.image-box {
+    flex: 1;
+}
+
+.img-refined {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    /* Bordas levemente suavizadas para o look premium */
+    box-shadow: 20px 20px 0px -5px #d4af37;
+    /* Detalhe em dourado simulando moldura */
+}
+
+/* Lista do Kit */
+.kit-list {
+    list-style: none;
+    padding: 0;
+    margin: 25px 0;
+}
+
+.kit-list li {
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: #444;
+    display: flex;
+    align-items: center;
+}
+
+.kit-list li::before {
+    content: "•";
+    color: #d4af37;
+    /* Dourado */
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+/* Ajuste suave para links internos */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Responsividade para Celular */
+@media (max-width: 768px) {
+
+    .grid-2,
+    .grid-2.reverse {
+        flex-direction: column;
+        padding: 50px 20px;
+        gap: 30px;
+    }
+
+    .content-box {
+        text-align: center;
+    }
+
+    .divisor-gold {
+        margin: 20px auto;
+    }
+}
+
+
+
+
 
 /* --- FOOTER --- */
 .footer {
