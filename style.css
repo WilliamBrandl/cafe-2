@@ -438,6 +438,8 @@ html {
 
 
 /* --- FOOTER --- */
+
+
 .footer {
     padding: 40px 0;
     background-color: var(--dark-coffee);
@@ -445,6 +447,25 @@ html {
     text-align: center;
     font-size: 0.8rem;
 }
+
+
+.footer-link {
+    color: inherit;
+    /* Mantém a cor do texto do footer */
+    text-decoration: none;
+    /* Remove o sublinhado padrão */
+    font-weight: 600;
+    /* Deixa o nome levemente em destaque */
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #d4af37;
+    /* Muda para o dourado da marca ao passar o mouse */
+    text-decoration: underline;
+    /* Adiciona o sublinhado apenas no hover */
+}
+
 
 /* --- RESPONSIVIDADE --- */
 @media (max-width: 768px) {
