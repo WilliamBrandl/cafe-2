@@ -67,30 +67,39 @@ async function getWeather() {
 }
 
 // Criamos uma função separada para organizar a exibição e não repetir código
+
 function exibirClima(data, nomeCidade) {
-    if (data.main) {
-        const temp = Math.round(data.main.temp);
-        const desc = data.weather[0].description.toLowerCase();
-        const hora = new Date().getHours();
-        const eNoite = (hora >= 18 || hora < 6);
+    if (!data || !data.main || !data.weather) {
+        console.error("Dados incompletos:", data);
+        return;
+    }
 
-        let emoji = "☕";
-        if (desc.includes("céu limpo") || desc.includes("sol")) {
-            emoji = eNoite ? "🌙" : "☀️";
-        } else if (desc.includes("nuvens") || desc.includes("nublado")) {
-            emoji = eNoite ? "☁️" : "🌥️";
-        } else if (desc.includes("chuva")) {
-            emoji = "🌧️";
-        }
+    const temp = Math.round(data.main.temp);
+    // Forçamos o lowercase para evitar erros de comparação
+    const desc = data.weather[0].description.toLowerCase();
 
-        const infoElement = document.getElementById('weather-info');
-        if (infoElement) {
-            infoElement.innerHTML = `${nomeCidade} ${emoji} | ${temp}°C — <span style="text-transform: capitalize;">${desc}</span>`;
-        }
+    // Pega a hora atual do sistema do usuário
+    const hora = new Date().getHours();
+    const eNoite = (hora >= 18 || hora < 6);
+
+    let emoji = "☁️"; // Emoji padrão caso não entre nos IFs
+
+    // Verificação mais flexível (aceita PT e EN)
+    if (desc.includes("limpo") || desc.includes("clear") || desc.includes("sol")) {
+        emoji = eNoite ? "🌙" : "☀️";
+    } else if (desc.includes("nuvens") || desc.includes("cloud") || desc.includes("nublado")) {
+        emoji = eNoite ? "☁️" : "🌥️";
+    } else if (desc.includes("chuva") || desc.includes("rain")) {
+        emoji = "🌧️";
+    }
+
+    const infoElement = document.getElementById('weather-info');
+    if (infoElement) {
+        infoElement.innerHTML = `${nomeCidade} ${emoji} | ${temp}°C — <span style="text-transform: capitalize;">${desc}</span>`;
+    } else {
+        console.error("Erro: O elemento #weather-info não foi encontrado no HTML desta página.");
     }
 }
-
-
 
 // --- INICIALIZAÇÃO AO CARREGAR A PÁGINA ---
 window.onload = function () {
