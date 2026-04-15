@@ -28,14 +28,15 @@ setInterval(carrossel, 4000);
 
 // --- FUNÇÃO DO CLIMA COM EMOJIS DINÂMICOS (DIA/NOITE) ---
 
+
 async function getWeather() {
     const apiKey = '7ac2bb399a2c778fbadb99d04bffc72c';
-    let city = 'São Paulo'; // Cidade padrão (Fallback)
+    let city = 'São Paulo'; // Cidade padrão
 
     try {
-        // Tenta buscar a cidade por IP usando HTTPS
-        // Adicionamos um pequeno delay/timeout para não travar o site se a API demorar
-        const ipResponse = await fetch('https://ipapi.co/json/', { timeout: 5000 });
+        // Trocamos para a API do Cloudflare (gratuita e sem bloqueio de CORS)
+        // Ela nos dá o código do país e a cidade baseada no IP de forma muito mais estável
+        const ipResponse = await fetch('https://get.geojs.io/v1/ip/geo.json');
 
         if (ipResponse.ok) {
             const ipData = await ipResponse.json();
@@ -44,15 +45,14 @@ async function getWeather() {
             }
         }
 
-        // Agora busca o clima
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=pt_br&appid=${apiKey}`;
+        // Busca o clima com encodeURIComponent para evitar erro com nomes de cidades com espaço/acento
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&units=metric&lang=pt_br&appid=${apiKey}`;
         const response = await fetch(url);
         const data = await response.json();
 
-        // Se a cidade não for encontrada pela OpenWeather (às vezes o nome vem diferente)
-        if (data.cod === "404") {
-            // Tenta de novo com a cidade padrão
-            const fallbackUrl = `https://api.openweathermap.org/data/2.5/weather?q=Sao Paulo&units=metric&lang=pt_br&appid=${apiKey}`;
+        if (data.cod === "404" || !data.main) {
+            // Se a cidade detectada pelo IP der erro na OpenWeather, força São Paulo
+            const fallbackUrl = `https://api.openweathermap.org/data/2.5/weather?q=Sao%20Paulo&units=metric&lang=pt_br&appid=${apiKey}`;
             const fbResponse = await fetch(fallbackUrl);
             const fbData = await fbResponse.json();
             exibirClima(fbData, "São Paulo");
@@ -62,7 +62,11 @@ async function getWeather() {
 
     } catch (error) {
         console.error("Erro na localização/clima:", error);
-        document.getElementById('weather-info').innerHTML = "O clima perfeito para um TAHOR ☕";
+        // Se tudo der errado, exibe a mensagem elegante da marca
+        const infoElement = document.getElementById('weather-info');
+        if (infoElement) {
+            infoElement.innerHTML = "O clima perfeito para um TAHOR ☕";
+        }
     }
 }
 
